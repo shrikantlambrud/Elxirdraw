@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5 d-flex justify-content-center">
+
+<div class="card shadow-lg p-4" style="max-width:420px; width:100%; border-radius:12px;">
+
+<h3 class="text-center mb-4">Pay ₹10 via UPI</h3>
+
+<div class="alert alert-info text-center">
+<h6 class="mb-2">Send ₹10 to UPI ID</h6>
+<h4 class="text-primary fw-bold">elixirdraw@okaxis</h4>
+</div>
+
+<div class="text-center mb-3">
+<small class="text-muted">
+After payment, enter your UTR number below
+</small>
+</div>
+
+<form method="POST">
+
+<label class="form-label">Enter UTR Number</label>
+
+<input 
+name="utr"
+class="form-control mb-3"
+placeholder="Example: 123456789012"
+pattern="[0-9]{12}"
+maxlength="12"
+inputmode="numeric"
+title="UTR must be exactly 12 digits"
+required>
+
+<button class="btn btn-success w-100">
+Submit UTR
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

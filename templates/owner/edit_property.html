@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5 d-flex justify-content-center">
+
+<div class="property-card">
+
+<h3 class="title">Edit Property</h3>
+
+<form method="POST" enctype="multipart/form-data">
+
+<input 
+name="title"
+value="{{property.title}}"
+placeholder="Property Title"
+class="form-control mb-3"
+required>
+
+<input 
+name="price"
+value="{{property.price}}"
+placeholder="Monthly Rent ₹"
+class="form-control mb-3"
+required>
+
+<input 
+name="deposit"
+value="{{property.deposit}}"
+placeholder="Deposit Amount"
+class="form-control mb-3">
+
+<input 
+name="city"
+value="{{property.city}}"
+placeholder="City"
+class="form-control mb-3"
+required>
+
+<input 
+name="area"
+value="{{property.area}}"
+placeholder="Area / Location"
+class="form-control mb-3"
+required>
+
+<!-- NEW CONTACT NUMBER FIELD -->
+
+<input 
+name="contact_number"
+value="{{property.contact_number}}"
+placeholder="Owner Contact Number"
+class="form-control mb-3"
+pattern="[0-9]{10}"
+maxlength="10"
+required>
+
+<!-- EXISTING IMAGE PREVIEW -->
+
+{% if property.image1 %}
+<label>Current Image 1</label>
+<img src="{{ url_for('static', filename='uploads/' + property.image1) }}"
+class="img-fluid rounded mb-2">
+{% endif %}
+
+<label class="mb-1">Change Image 1</label>
+<input type="file" name="image1" class="form-control mb-3">
+
+{% if property.image2 %}
+<label>Current Image 2</label>
+<img src="{{ url_for('static', filename='uploads/' + property.image2) }}"
+class="img-fluid rounded mb-2">
+{% endif %}
+
+<label class="mb-1">Change Image 2</label>
+<input type="file" name="image2" class="form-control mb-3">
+
+<input 
+name="map_link"
+value="{{property.map_link}}"
+placeholder="Google Map Location Link"
+class="form-control mb-3">
+
+<button class="btn btn-primary btn-pay">
+Update Property
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<style>
+
+.property-card{
+width:450px;
+background:white;
+padding:35px;
+border-radius:12px;
+box-shadow:0 12px 30px rgba(0,0,0,0.2);
+}
+
+.title{
+text-align:center;
+font-weight:600;
+margin-bottom:25px;
+}
+
+.form-control{
+height:45px;
+border-radius:8px;
+}
+
+.btn-pay{
+width:100%;
+height:45px;
+border-radius:8px;
+font-weight:600;
+}
+
+</style>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="mb-4">Available Properties</h3>
+
+<div class="row">
+
+{% for p in properties %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow-sm h-100">
+
+<!-- Image -->
+<!-- {% if p.image1 %}
+<img src="{{ url_for('static', filename='uploads/' + p.image1) }}" 
+class="card-img-top" 
+style="height:200px; object-fit:cover;">
+{% else %}
+<img src="https://via.placeholder.com/400x200"
+class="card-img-top">
+{% endif %} -->
+
+<div class="card-body">
+
+<h5 class="card-title">{{ p.title }}</h5>
+
+<p class="text-muted mb-1">
+📍 {{ p.city }}{% if p.area %}, {{ p.area }}{% endif %}
+</p>
+
+<p class="fw-bold text-success">
+₹{{ p.price }} / month
+</p>
+
+{% if p.deposit %}
+<p class="text-secondary">
+💰 Deposit: ₹{{ p.deposit }}
+</p>
+{% endif %}
+
+<p class="text-secondary">
+📅 Posted: {{ p.created_at }}
+</p>
+
+<p>
+Status: 
+<span class="badge bg-success">{{ p.status }}</span>
+</p>
+
+<!-- CONTACT NUMBER -->
+
+{% if p.contact_number %}
+<p class="mt-2">
+📞 <strong>{{ p.contact_number }}</strong>
+</p>
+
+<div class="d-flex gap-2">
+
+<a href="tel:{{ p.contact_number }}" 
+class="btn btn-success btn-sm">
+📞 Call
+</a>
+
+<a href="https://wa.me/91{{ p.contact_number }}" 
+target="_blank"
+class="btn btn-success btn-sm">
+💬 WhatsApp
+</a>
+
+</div>
+
+{% endif %}
+
+{% if p.map_link %}
+<a href="{{ p.map_link }}" target="_blank" class="btn btn-outline-primary btn-sm mt-2">
+📍 View on Map
+</a>
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

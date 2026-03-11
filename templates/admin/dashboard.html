@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+
+<h3 class="mb-4 fw-bold">💰 Admin - Property Payments</h3>
+
+<div class="row">
+
+{% for p in properties %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow-sm border-0 h-100">
+
+<div class="card-body">
+
+<h5 class="card-title fw-bold">
+🏠 {{ p.title }}
+</h5>
+
+<p class="text-muted mb-1">
+👤 Owner: <strong>{{ p.name }}</strong>
+</p>
+
+<p class="mb-2">
+🧾 UTR:
+<span class="badge bg-info text-dark">
+{{ p.utr_number }}
+</span>
+</p>
+
+<p>
+Status:
+
+{% if p.payment_status == 'approved' %}
+<span class="badge bg-success">Approved</span>
+
+{% elif p.payment_status == 'submitted' %}
+<span class="badge bg-warning text-dark">Pending Approval</span>
+
+{% endif %}
+
+</p>
+
+<hr>
+
+{% if p.payment_status == 'submitted' %}
+
+<a href="/admin/approve/{{p.id}}" 
+class="btn btn-success w-100 mb-2">
+✔ Approve Payment
+</a>
+
+<a href="/admin/reject/{{p.id}}" 
+class="btn btn-danger w-100">
+Reject
+</a>
+
+{% else %}
+
+<button class="btn btn-secondary w-100" disabled>
+Already Approved
+</button>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

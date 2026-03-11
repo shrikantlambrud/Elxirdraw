@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h3 class="fw-bold">🏠 Owner Dashboard</h3>
+
+<a href="/owner/add-property" class="btn btn-primary">
++ Add Property (₹10)
+</a>
+</div>
+
+<div class="row">
+
+{% for p in properties %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow-sm h-100">
+
+{% if p.image1 %}
+<img src="{{ url_for('static', filename='uploads/' + p.image1) }}" 
+class="card-img-top" style="height:200px; object-fit:cover;">
+{% endif %}
+
+<div class="card-body">
+
+<h5 class="card-title">{{p.title}}</h5>
+
+<p class="text-muted mb-1">
+📍 {{p.city}} - {{p.area}}
+</p>
+
+<p class="fw-bold text-success">
+₹{{p.price}} / month
+</p>
+
+{% if p.deposit %}
+<p>Deposit: ₹{{p.deposit}}</p>
+{% endif %}
+
+<!-- STATUS BADGE -->
+
+<p>
+Status:
+
+{% if p.status == "active" %}
+<span class="badge bg-success">Active</span>
+
+{% elif p.status == "pending" %}
+<span class="badge bg-warning text-dark">Pending Approval</span>
+
+{% else %}
+<span class="badge bg-danger">Rejected</span>
+{% endif %}
+
+</p>
+
+<hr>
+
+<div class="d-flex justify-content-between">
+
+<a href="/owner/edit-property/{{p.id}}" 
+class="btn btn-outline-primary btn-sm">
+Edit
+</a>
+
+<a href="/owner/delete-property/{{p.id}}" 
+class="btn btn-outline-danger btn-sm"
+onclick="return confirm('Are you sure you want to delete this property?')">
+Delete
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}
